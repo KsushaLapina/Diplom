@@ -57,7 +57,7 @@ class Actor {
         if (!(movingObj instanceof Actor)) {
             throw new Error('Аргумент должен быть экземпляром класса Actor');
         }
-        if (movingObj == this) return false;
+        if (movingObj === this) return false;
         if (movingObj.left >= this.right) return false;
         if (movingObj.top >= this.bottom) return false;
         if (movingObj.right <= this.left) return false;
@@ -121,7 +121,7 @@ class Level {
 
     removeActor(obj) {
         var indexObj = this.actors.indexOf(obj);
-        if (indexObj != -1){
+        if (indexObj !== -1){
             this.actors.splice(indexObj, 1);
         }
     }
@@ -134,11 +134,11 @@ class Level {
         var _this = this;
         if (this.status !== null) {
             return false;
-        } else if ((type == "lava") || (type == "fireball")) {
+        } else if ((type === "lava") || (type === "fireball")) {
             this.status = "lost";
             this.finishDelay = 1;
-        } else if (type == "coin") {
-            this.actors = this.actors.filter(obj => obj != movingObj);
+        } else if (type === "coin") {
+            this.actors = this.actors.filter(obj => obj !== movingObj);
             if (this.noMoreActors('coin')) {
                 this.status = "won";
                 this.finishDelay = 1;
@@ -190,14 +190,14 @@ class LevelParser {
         if (this.dictionary) {
             arrayString.forEach((line, y) => {
                 line.split('').forEach((symbol, x) => {
-                if (typeof this.dictionary[symbol] === 'function') {
-                const actor = new this.dictionary[symbol](new Vector (x,y));
-                if (actor instanceof Actor) {
-                    arrayMovingObj.push(actor);
-                }
-            }
-        });
-        });
+                    if (typeof this.dictionary[symbol] === 'function') {
+                        const actor = new this.dictionary[symbol](new Vector (x,y));
+                            if (actor instanceof Actor) {
+                                arrayMovingObj.push(actor);
+                            }
+                    }
+                });
+            });
         }
         return arrayMovingObj;
     }
@@ -208,7 +208,6 @@ class LevelParser {
 }
 
 class Fireball extends Actor {
-
     constructor (pos = new Vector(0,0), speed = new Vector(0,0)) {
         super(pos, new Vector (1,1), speed);
     }

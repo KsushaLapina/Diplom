@@ -308,12 +308,12 @@ const actorDict = {
     '=': HorizontalFireball,
     '|': VerticalFireball,
     'o': Coin
-}
+};
 
 const parser = new LevelParser(actorDict);
 
 loadLevels()
     .then(schemas => runGame(JSON.parse(schemas), parser, DOMDisplay))
-.then(() => alert('Вы выиграли приз!'))
+.then(() => alert('Вы выиграли!'))
 .catch(err => alert(err));
 

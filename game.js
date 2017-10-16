@@ -217,7 +217,8 @@ class Fireball extends Actor {
     }
 
     getNextPosition(time = 1) {
-        return new Vector (this.pos.x + this.speed.x * time, this.pos.y + this.speed.y * time);
+        return this.pos.plus(this.speed.times(time));
+        //return new Vector (this.pos.x + this.speed.x * time, this.pos.y + this.speed.y * time);
     }
 
     handleObstacle() {
